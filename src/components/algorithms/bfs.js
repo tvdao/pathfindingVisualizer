@@ -1,6 +1,4 @@
-const bfs = (grids, startNode, finishNode) => {
-
-    let grid = grids;
+const bfs = (grid, startNode, finishNode) => {
 
     let queue = [startNode];
 

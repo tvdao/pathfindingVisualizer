@@ -2,23 +2,28 @@ import React from "react";
 import Node from "./Node.jsx";
 import "./Grid.css"
 
-const Grid = ({grid}) => {
+const Grid = ({grid, placeWalls, mouseDownEvent, mouseUpEvent, mouseEnterEvent}) => {
     return (
         <div className="grid">
             {grid.map((row, rowId) => {
                 return (
                     <div key={rowId}>
-                        {row.map((col, colId) => {
+                        {row.map((node, nodeId) => {
                             return (
                                 <Node 
-                                    key = {colId}
-                                    col = {col.col}
-                                    row = {col.row}
-                                    isWall = {col.isWall}
-                                    isStart = {col.isStart}
-                                    isFinish = {col.isFinish}
-                                    isVisited = {col.isVisited}
-                                    isVisitedAfter = {col.isVisitedAfter}
+                                    key = {nodeId}
+                                    col = {node.col}
+                                    row = {node.row}
+                                    isWall = {node.isWall}
+                                    isStart = {node.isStart}
+                                    isFinish = {node.isFinish}
+                                    isVisited = {node.isVisited}
+                                    isVisitedAfter = {node.isVisitedAfter}
+                                    startToEnd = {node.startToEnd}
+                                    placeWalls = {placeWalls}
+                                    mouseDownEvent = {mouseDownEvent}
+                                    mouseUpEvent = {mouseUpEvent}
+                                    mouseEnterEvent = {mouseEnterEvent}
                                 />
                             )
                         })}
