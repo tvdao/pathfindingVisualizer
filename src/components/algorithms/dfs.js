@@ -1,16 +1,17 @@
-const bfs = (grid, startNode, finishNode) => {
+const dfs = (grid, startNode, finishNode) => {
 
-    let queue = [startNode];
+    let stack = [startNode];
 
     let nodesVisited = [];
 
-    while (queue.length !== 0) {
-        let currentNode = queue.shift();
+    while (stack.length !== 0) {
+        let currentNode = stack.pop();
 
         if (currentNode === finishNode) {
             nodesVisited.push(currentNode);
             return nodesVisited;
         }
+
         if (!currentNode.isWall && !currentNode.isVisited) {
             currentNode.isVisited = true;
             nodesVisited.push(currentNode);
@@ -19,28 +20,28 @@ const bfs = (grid, startNode, finishNode) => {
             if (row > 0) {
                 nextNode = grid[row-1][col];
                 if (!nextNode.isVisited) {
-                    queue.push(nextNode);
+                    stack.push(nextNode);
                     nextNode.prevNode = currentNode;
                 }
             }
             if (row < grid.length-1) {
                 nextNode = grid[row+1][col];
                 if (!nextNode.isVisited) {
-                    queue.push(nextNode);
+                    stack.push(nextNode);
                     nextNode.prevNode = currentNode
                 }
             }
             if (col > 0) {
                 nextNode = grid[row][col-1];
                 if (!nextNode.isVisited) {
-                    queue.push(nextNode);
+                    stack.push(nextNode);
                     nextNode.prevNode = currentNode
                 }
             }
             if (col < grid[0].length-1) {
                 nextNode = grid[row][col+1];
                 if (!nextNode.isVisited) {
-                    queue.push(nextNode);
+                    stack.push(nextNode);
                     nextNode.prevNode = currentNode
                 }
             }
@@ -48,4 +49,4 @@ const bfs = (grid, startNode, finishNode) => {
     }
 }
 
-export {bfs};
+export {dfs};

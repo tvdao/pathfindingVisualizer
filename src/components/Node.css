@@ -23,22 +23,22 @@
 @keyframes shortestPathAnimation {
   0% {
     transform: scale(0.3);
-    background-color:#FFFACD;
+    background-color:gold;
     border-radius: 100%;
   }
   
   50% {
-    background-color:#FFFACD;
+    background-color:gold;
   }
   
   75% {
     transform: scale(1.2);
-    background-color:#FFFACD;
+    background-color:gold;
   }
   
   100% {
     transform: scale(1);
-    background-color:#FFFACD;
+    background-color:gold;
   }
 }
 

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Grid from "./components/Grid.jsx"
 import {initialGrid} from "./gridOperations";
 import {bfs} from "./components/algorithms/bfs.js";
+import {dfs} from "./components/algorithms/dfs.js";
 
 const App = () => {
 
@@ -27,7 +28,12 @@ const App = () => {
         let shortestPath;
         if (algo === "bfs") {
             visitedNodesInOrder = bfs(gridState.grid, startNode, finishNode);
-            shortestPath = nodesInShortestPath(finishNode)
+            shortestPath = nodesInShortestPath(finishNode);
+            animate(visitedNodesInOrder, shortestPath);
+        }
+        if (algo === "dfs") {
+            visitedNodesInOrder = dfs(gridState.grid, startNode, finishNode);
+            shortestPath = nodesInShortestPath(finishNode);
             animate(visitedNodesInOrder, shortestPath);
         }
     };
@@ -91,7 +97,9 @@ const App = () => {
 
     const placeWalls = (col, row) => {
         let newGrid = gridState.grid;
-        newGrid[row][col].isWall = true;
+        if (!gridState.grid[row][col].isStart && !gridState.grid[row][col].isFinish) {
+            newGrid[row][col].isWall = true;
+        }
         return newGrid;
     }  
 
@@ -134,7 +142,8 @@ const App = () => {
         if (!gridState.isRunning) {
             if (gridState.mousePressed) {
                 if (gridState.isStart) {
-                    if (!gridState.grid[row][col].isWall) {
+                    if (!gridState.grid[row][col].isWall && !gridState.grid[row][col].isFinish) {
+                        console.log(gridState.grid[row][col].isWall);
                         let newGrid = gridState.grid;
                         newGrid[gridState.currRow][gridState.currCol].isStart = false;
                         newGrid[row][col].isStart = true;
@@ -146,10 +155,11 @@ const App = () => {
                             currCol: col,
                             currRow: row
                         })
+                        console.log(gridState.startNodeCol + " " + gridState.startNodeRow);
                     }
                 }
                 else if (gridState.isFinish) {
-                    if (!gridState.grid[row][col].isWall) {
+                    if (!gridState.grid[row][col].isWall && !gridState.grid[row][col].isStart) {
                         let newGrid = gridState.grid;
                         newGrid[gridState.currRow][gridState.currCol].isFinish = false;
                         newGrid[row][col].isFinish = true;
@@ -164,13 +174,11 @@ const App = () => {
                     }
                 }
                 else {
-                    if (!gridState.grid[row][col].isStart || !gridState.grid[row][col].isFinish) {
-                        let newGrid = placeWalls(col, row);
-                        setGridState({
-                            ...gridState,
-                            grid: newGrid
-                        })
-                    }
+                    let newGrid = placeWalls(col, row);
+                    setGridState({
+                        ...gridState,
+                        grid: newGrid
+                    })
                 }
             }
         }
@@ -218,6 +226,9 @@ const App = () => {
             <button onClick={() => {
                 visualize("bfs")
             }}>BFS</button>
+            <button onClick={() => {
+                visualize("dfs")
+            }}>DFS</button>
         </div>
     )
 }
