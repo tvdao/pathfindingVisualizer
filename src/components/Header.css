@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    text-align: center;
+  }
+  .wrapper {
+    width: 1170px;
+    margin: 0 10px 0 20px;
+  }
+  header {
+    height: 100px;
+    background: #262626;
+    width: 100%;
+    position: fixed;
+  }
+  .logo {
+    float: left;
+    line-height: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: poppins;
+    color: #fff;
+    letter-spacing: 5px;
+    
+  }
+  
+  nav {
+    line-height: 110px;
+  }
+  nav .nav-button {
+    text-decoration: none;
+    font-family: poppins;
+    letter-spacing: 4px;
+    font-size: 20px;
+    margin: 0 20px;
+    color: #fff;
+  }
+
+  .nav-button {
+      float: right;
+  }
+  .nav-button:hover {
+    color: #6495ED;
+}

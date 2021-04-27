@@ -12,7 +12,8 @@ const initialGrid = () => {
                 isFinish: (row === 10 && col === 30) ? true : false,
                 isVisited: false,
                 isVisitedAfter: false,
-                startToEnd: false
+                startToEnd: false,
+                distance: Infinity,
             })
         }
     }

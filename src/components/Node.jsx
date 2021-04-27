@@ -3,9 +3,9 @@ import "./Node.css";
 
 const Node= (props) => {
 
-    const {col, row, isWall, isStart, isFinish, isVisited, isVisitedAfter} = props;
+    const {col, row, isWall, isStart, isFinish, isVisitedAfter} = props;
 
-    const {startToEnd, placeWalls, mouseDownEvent, mouseUpEvent, mouseEnterEvent} = props;
+    const {startToEnd, mouseDownEvent, mouseUpEvent, mouseEnterEvent} = props;
 
     let nodeStyle = [
         "node",
@@ -15,12 +15,6 @@ const Node= (props) => {
         startToEnd ? "shortestPath" : "",
         isWall ? "wall" : ""
     ]
-    // onMouseDown = {() => {
-    //     placeWalls({
-    //         col: col,
-    //         row: row
-    //     })
-    //  }}
 
     return (
         <div className = {nodeStyle.join(" ")}

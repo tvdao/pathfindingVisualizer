@@ -3,6 +3,7 @@ import Grid from "./components/Grid.jsx"
 import {initialGrid} from "./gridOperations";
 import {bfs} from "./components/algorithms/bfs.js";
 import {dfs} from "./components/algorithms/dfs.js";
+import Header from "./components/Header.jsx";
 
 const App = () => {
 
@@ -26,15 +27,17 @@ const App = () => {
         const finishNode = grid[finishNodeRow][finishNodeCol];
         let visitedNodesInOrder;
         let shortestPath;
-        if (algo === "bfs") {
-            visitedNodesInOrder = bfs(gridState.grid, startNode, finishNode);
-            shortestPath = nodesInShortestPath(finishNode);
-            animate(visitedNodesInOrder, shortestPath);
-        }
-        if (algo === "dfs") {
-            visitedNodesInOrder = dfs(gridState.grid, startNode, finishNode);
-            shortestPath = nodesInShortestPath(finishNode);
-            animate(visitedNodesInOrder, shortestPath);
+        if (isGridClear()) {
+            if (algo === "bfs") {
+                visitedNodesInOrder = bfs(grid, startNode, finishNode);
+                shortestPath = nodesInShortestPath(finishNode);
+                animate(visitedNodesInOrder, shortestPath);
+            }
+            if (algo === "dfs") {
+                visitedNodesInOrder = dfs(grid, startNode, finishNode);
+                shortestPath = nodesInShortestPath(finishNode);
+                animate(visitedNodesInOrder, shortestPath);
+            }
         }
     };
 
@@ -44,6 +47,10 @@ const App = () => {
                 setTimeout( () => {
                     animateShortestPath(nodesShortestPath);
                 }, 10 * i);
+                setGridState({
+                    ...gridState,
+                    isRunning: false
+                })
                 return;
             }
             setTimeout( () => {
@@ -57,11 +64,11 @@ const App = () => {
                 newGrid[row][col] = newNode;
                 setGridState({
                     ...gridState,
-                    grid: newGrid
+                    grid: newGrid,
+                    isRunning: true
                 })
             }, 10 * i)
-        }
-        
+        }  
     }
 
     const animateShortestPath = (nodesShortestPath) => {
@@ -104,7 +111,9 @@ const App = () => {
     }  
 
     const mouseDownEvent = (event) => {
-        const {col, row, finish, start} = event.currentTarget.dataset;
+        let {col, row, finish, start} = event.currentTarget.dataset;
+        col = Number(col);
+        row = Number(row);
         if (!gridState.isRunning) {
             if (start === "true") {
                 setGridState({
@@ -138,12 +147,13 @@ const App = () => {
     }
 
     const mouseEnterEvent = (event) => {
-        const {col, row} = event.currentTarget.dataset;
+        let {col, row} = event.currentTarget.dataset;
+        col = Number(col);
+        row = Number(row);
         if (!gridState.isRunning) {
             if (gridState.mousePressed) {
                 if (gridState.isStart) {
                     if (!gridState.grid[row][col].isWall && !gridState.grid[row][col].isFinish) {
-                        console.log(gridState.grid[row][col].isWall);
                         let newGrid = gridState.grid;
                         newGrid[gridState.currRow][gridState.currCol].isStart = false;
                         newGrid[row][col].isStart = true;
@@ -155,7 +165,6 @@ const App = () => {
                             currCol: col,
                             currRow: row
                         })
-                        console.log(gridState.startNodeCol + " " + gridState.startNodeRow);
                     }
                 }
                 else if (gridState.isFinish) {
@@ -185,7 +194,9 @@ const App = () => {
     }
 
     const mouseUpEvent = (event) => {
-        const {col, row} = event.currentTarget.dataset;
+        let {col, row} = event.currentTarget.dataset;
+        col = Number(col);
+        row = Number(row);
         if (!gridState.isRunning) {
             if (gridState.isStart) {
                 setGridState({
@@ -214,8 +225,56 @@ const App = () => {
         }
     }
 
+    const clearGrid = () => {
+        let grid = gridState.grid;
+        for (let row = 0; row < grid.length; row++) {
+            for (let col = 0; col < grid[0].length; col++) {
+                grid[row][col].isVisitedAfter = false;
+                grid[row][col].startToEnd = false;
+                grid[row][col].isVisited = false;
+                grid[row][col].prevNode = null;
+            }
+        }
+        setGridState({
+            ...gridState,
+            grid: grid
+        })
+    }
+
+    const clearWall = () => {
+        let grid = gridState.grid.slice();
+        if (!gridState.isRunning) {
+            for (let row = 0; row < grid.length; row++) {
+                for (let col = 0; col < grid[0].length; col++) {
+                    grid[row][col].isWall = false;
+                }
+            }
+            setGridState({
+                ...gridState,
+                grid: grid
+            })
+        }
+    }
+
+    const isGridClear = () => {
+        let grid = gridState.grid.slice();
+        for (let row = 0; row < grid.length; row++) {
+            for (let col = 0; col < grid[0].length; col++) {
+                if (grid[row][col].isVisitedAfter || grid[row][col].startToEnd) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     return (
         <div>
+            <Header 
+                visualize = {visualize}
+                clearGrid = {clearGrid}
+                clearWall = {clearWall}
+            />
             <Grid
                 grid = {gridState.grid}
                 placeWalls = {placeWalls}
@@ -223,12 +282,6 @@ const App = () => {
                 mouseUpEvent = {mouseUpEvent}
                 mouseEnterEvent = {mouseEnterEvent}
             />
-            <button onClick={() => {
-                visualize("bfs")
-            }}>BFS</button>
-            <button onClick={() => {
-                visualize("dfs")
-            }}>DFS</button>
         </div>
     )
 }
