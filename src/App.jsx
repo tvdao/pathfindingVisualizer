@@ -3,6 +3,7 @@ import Grid from "./components/Grid.jsx"
 import {initialGrid} from "./gridOperations";
 import {bfs} from "./components/algorithms/bfs.js";
 import {dfs} from "./components/algorithms/dfs.js";
+import {dijkstra} from "./components/algorithms/dijkstra.js";
 import Header from "./components/Header.jsx";
 
 const App = () => {
@@ -30,14 +31,16 @@ const App = () => {
         if (isGridClear()) {
             if (algo === "bfs") {
                 visitedNodesInOrder = bfs(grid, startNode, finishNode);
-                shortestPath = nodesInShortestPath(finishNode);
-                animate(visitedNodesInOrder, shortestPath);
             }
             if (algo === "dfs") {
                 visitedNodesInOrder = dfs(grid, startNode, finishNode);
-                shortestPath = nodesInShortestPath(finishNode);
-                animate(visitedNodesInOrder, shortestPath);
             }
+            if (algo === "dijkstra") {
+                visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+            }
+            shortestPath = nodesInShortestPath(finishNode);
+            console.log(shortestPath);
+            animate(visitedNodesInOrder, shortestPath);
         }
     };
 
