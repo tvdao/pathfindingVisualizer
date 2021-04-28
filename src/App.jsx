@@ -17,6 +17,7 @@ import {initialGrid} from "./gridOperations";
 import {bfs} from "./components/algorithms/bfs.js";
 import {dfs} from "./components/algorithms/dfs.js";
 import {dijkstra} from "./components/algorithms/dijkstra.js";
+import {aStar} from "./components/algorithms/aStar.js";
 import Header from "./components/Header.jsx";
 
 /**
@@ -43,6 +44,15 @@ const App = () => {
         isStart: false
     });
 
+    const calcDistanceToFinNode = () => {
+        const {finishNodeRow, finishNodeCol, grid} = gridState;
+        for (let row = 0; row < grid.length; row++) {
+            for (let col = 0; col < grid[0].length; col++) {
+                gridState.grid[row][col].distanceToFinishNode = Math.abs(row - finishNodeRow) + Math.abs(col - finishNodeCol);
+            }
+        }
+    }
+
     /**
      * Calls the algorithm that is requested, then calls method that 
      * graphically displays how the algorithm searches for the finish 
@@ -66,6 +76,10 @@ const App = () => {
             }
             if (algo === "dijkstra") {
                 visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+            }
+            if (algo === "A*") {
+                calcDistanceToFinNode();
+                visitedNodesInOrder = aStar(grid, startNode, finishNode);
             }
             // shortest path from start to finish
             shortestPath = nodesInShortestPath(finishNode);

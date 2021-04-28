@@ -1,22 +1,22 @@
 /**
- * Filename: dijkstra.js
+ * Filename: aStar.js
  * Author: Tri Dao
  * Date: 4/28/21
  * 
- * Summary of File: 
- *      This file contains the dijkstra algorithm and how it traverses the grid
+ * Summary of File:
+ *      This file contains the A* algorithm. 
  */
 
 /**
- * Dijkstra algoritm that will be ran on the grid
+ * aStar algorithm that will be ran on the grid
  * 
- * @param grid - The grid that the djikstra algorithm will be ran on
+ * @param grid - The grid that the aStar algorithm will be ran on
  * @param startNode - The startNode of the grid
  * @param finishNode - The finishNode of the grid
  * 
- * @return - An array that contains the nodes visited by dijkstra
+ * @return - An array that contains the nodes visited by aStar
  */
-const dijkstra = (grid, startNode, finishNode) => {
+const aStar = (grid, startNode, finishNode) => {
     let nodesVisited = [];
     startNode.distance = 0;
     // store all unvisited nodes in array
@@ -47,7 +47,7 @@ const dijkstra = (grid, startNode, finishNode) => {
  * 
  * @param unvisitedNodes - Array of unvisited nodes
  */
-const sortNodesByDistance = (unvisitedNodes) => {
+ const sortNodesByDistance = (unvisitedNodes) => {
     unvisitedNodes.sort((node1, node2) => node1.distance - node2.distance);
 }
 
@@ -58,7 +58,7 @@ const sortNodesByDistance = (unvisitedNodes) => {
  * 
  * @returns array of all the nodes in the grid
  */
-const getAllNodes = (grid) => {
+ const getAllNodes = (grid) => {
     let nodes = [];
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[0].length; col++) {
@@ -71,13 +71,14 @@ const getAllNodes = (grid) => {
 /**
  * Add 1 to the current distance of the univisted nodes
  * 
- * @param node - The node that will add 1 to the distance of it's neighbor nodes
+ * @param node - The node that will add 1 to the distance of it's neighbor nodes 
+ *               and their distance to the finish Node
  * @param grid - The grid contains the nodes that wil be updated
  */
-const updateUnvisitedNeighbors = (node, grid) => {
+ const updateUnvisitedNeighbors = (node, grid) => {
     const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
     for (let i = 0; i < unvisitedNeighbors.length; i++) {
-        unvisitedNeighbors[i].distance = node.distance + 1;
+        unvisitedNeighbors[i].distance = node.distance + 1 + unvisitedNeighbors[i].distanceToFinishNode;
         unvisitedNeighbors[i].prevNode = node;
     } 
 }
@@ -90,7 +91,7 @@ const updateUnvisitedNeighbors = (node, grid) => {
  * 
  * @returns Array that only has nodes that are not visited
  */
-const getUnvisitedNeighbors = (node, grid) => {
+ const getUnvisitedNeighbors = (node, grid) => {
     let neighbors = [];
     const {col, row} = node;
     if (row > 0) {
@@ -108,4 +109,4 @@ const getUnvisitedNeighbors = (node, grid) => {
     return neighbors.filter(neighbor => !neighbor.isVisited);
 }
 
-export {dijkstra};
+export {aStar}

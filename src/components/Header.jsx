@@ -36,6 +36,7 @@ const Header = ({visualize, clearGrid, clearWall}) => {
                 <div className="nav-button" onClick={() => visualize("bfs")}>BFS</div>
                 <div className="nav-button" onClick={() => visualize("dfs")}>DFS</div>
                 <div className="nav-button" onClick={() => visualize("dijkstra")}>Dijkstra</div>
+                <div className="nav-button" onClick={() => visualize("A*")}>A*</div>
                 <div className="nav-button" onClick={() => clearWall()}>Clear Walls</div>
                 <div className="nav-button" onClick={() => clearGrid()}>Clear Grid</div>
             </nav>
