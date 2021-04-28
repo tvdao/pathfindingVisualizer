@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Pathfinding Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project graphically shows how different path finding algorithms search for the finish node.
+Click here for a [Live Demo](https://tvdao.github.io/pathfindingVisualizer/)
+![Image of App](images/introPicture.png)
 
 ## Available Scripts
 
