@@ -1,12 +1,16 @@
 # Pathfinding Visualizer
 
 This project graphically shows how different path finding algorithms search for the finish node.
+<br />
 Click here for a [Live Demo](https://tvdao.github.io/pathfindingVisualizer/)
+<br />
 ![Image of App](images/introPicture.png)
 
-## Available Scripts
+## Overview:
 
-In the project directory, you can run:
+This project visualizes path finding algorithms like BFS, DFS, etc. All the algorithms
+start at the green node and it searches for the red node, as shown in the image above. 
+The app was all built in React.
 
 ### `npm start`
 
