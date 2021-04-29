@@ -1,9 +1,9 @@
 # Pathfinding Visualizer
 
 This project graphically shows how different path finding algorithms search for the finish node.
-<br />
+<br /><br />
 Click here for a [Live Demo](https://tvdao.github.io/pathfindingVisualizer/)
-<br />
+<br /><br />
 ![Image of App](images/introPicture.png)
 
 ## Overview:
