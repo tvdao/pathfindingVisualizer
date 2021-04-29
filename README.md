@@ -18,31 +18,31 @@ I built this project to reinforce my understandings of common path finding algor
 
 ## Meet The Algorithms:
 
-### Breadth First Search
-- asdfaasdf
-- asdfasdfasdf
-- asdfasdfasdfasdf
+### Breadth First Search 
+- Traverses equally in each direction
+- Used for unweighted graphs
+- Will always find the shortest path
 <br /><br />
 ![Image of BFS](images/bfs.png)
 
 ### Dephth First Search
-- asdfaasdf
-- asdfasdfasdf
-- asdfasdfasdfasdf
+- Traverses in one direction as far as possible before backtracking
+- Used for unweighted graphs
+- Will not always find the shortest path
 <br /><br />
 ![Image of BFS](images/dfs.png)
 
 ### Dijkstra
-- asdfaasdf
-- asdfasdfasdf
-- asdfasdfasdfasdf
+- Traverses graph using the distance from node to node. Picks the smallest distance.
+- Used for weighted graphs
+- Will always find the shortest path
 <br /><br />
 ![Image of BFS](images/dijkstra.png)
 
 ### A Star
-- asdfaasdf
-- asdfasdfasdf
-- asdfasdfasdfasdf
+- Best pathfinding algorithm out of the 4. Variation of Dijkstra's algorithm, using heuristics to guide itself.
+- Used for weighted graphs
+- Will always find the shortest path
 <br /><br />
 ![Image of BFS](images/aStar.png)
 
