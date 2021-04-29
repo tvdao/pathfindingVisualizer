@@ -12,7 +12,39 @@ This project visualizes path finding algorithms like BFS, DFS, etc. All the algo
 start at the green node and it searches for the red node, as shown in the image above. 
 The app was all built in React.
 
-### `npm start`
+## Intro:
+
+I built this project to reinforce my understandings of common path finding algorithms like BFS and DFS. I had trouble imagining how these algorithms ran in my head, and I thought a visual representation of the algorithms would help my comprehension of these algorithms. Through building this project, I also got to learn more path finding algorithms like A*. 
+
+## Meet The Algorithms:
+
+### Breadth First Search
+- asdfaasdf
+- asdfasdfasdf
+- asdfasdfasdfasdf
+<br /><br />
+![Image of BFS](images/bfs.png)
+
+### Dephth First Search
+- asdfaasdf
+- asdfasdfasdf
+- asdfasdfasdfasdf
+<br /><br />
+![Image of BFS](images/dfs.png)
+
+### Dijkstra
+- asdfaasdf
+- asdfasdfasdf
+- asdfasdfasdfasdf
+<br /><br />
+![Image of BFS](images/dijkstra.png)
+
+### A Star
+- asdfaasdf
+- asdfasdfasdf
+- asdfasdfasdfasdf
+<br /><br />
+![Image of BFS](images/aStar.png)
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
